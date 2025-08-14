@@ -242,14 +242,16 @@ extension DataRequest {
         }
     }
     
+    @Sendable
     func validateContentType() -> Self {
-        let contentTypes: () -> [String] = { [unowned self] in
-            if let accept = request?.value(forHTTPHeaderField: "Accept") {
-                return accept.components(separatedBy: ",")
-            }
-            return ["*/*"]
+        let contentTypes: [String]
+        if let accept = request?.value(forHTTPHeaderField: "Accept") {
+            contentTypes = accept.components(separatedBy: ",")
+        } else {
+            contentTypes = ["*/*"]
         }
-        return validate(contentType: contentTypes())
+        
+        return validate(contentType: contentTypes)
     }
 }
 
