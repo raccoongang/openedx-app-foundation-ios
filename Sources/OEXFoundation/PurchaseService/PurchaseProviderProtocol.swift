@@ -13,7 +13,7 @@ public protocol PurchaseProviderProtocol: Sendable {
     func configure(configuration: Any?)
     
     // MARK: CourseDetails Screen
-    func purchaseCourse(courseID: String, priceTier: String) async throws -> Bool
+    func purchaseCourse(courseID: String, userEmail: String?, priceTier: String) async throws -> Bool
     func getCoursePriceTier(courseID: String) async throws -> String?
     func localizedPrice(tier: String) async throws -> String
     
@@ -32,7 +32,7 @@ public class InAppPurchasesManagerMock: PurchaseProviderProtocol, @unchecked Sen
         [:]
     }
 
-    public func purchaseCourse(courseID: String, priceTier: String) async throws -> Bool {
+    public func purchaseCourse(courseID: String, userEmail: String?, priceTier: String) async throws -> Bool {
         return true
     }
     
