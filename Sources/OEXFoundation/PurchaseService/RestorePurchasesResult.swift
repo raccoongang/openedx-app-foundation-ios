@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum RestorePurchasesResult {
+public enum RestorePurchasesResult: Sendable {
     case restored
     case nothingToRestore
 }
