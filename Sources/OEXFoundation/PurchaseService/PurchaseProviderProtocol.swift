@@ -20,7 +20,7 @@ public protocol PurchaseProviderProtocol: Sendable {
     // MARK: Discovery Screen
     func getLocalizedCoursesTiers(courseIDs: [String]) async throws -> [String: String]
     
-    func restorePurchases() async throws
+    func restorePurchases() async throws -> RestorePurchasesResult
 }
 
 #if DEBUG
@@ -46,6 +46,8 @@ public class InAppPurchasesManagerMock: PurchaseProviderProtocol, @unchecked Sen
         ""
     }
     
-    public func restorePurchases() async throws {}
+    public func restorePurchases() async throws -> RestorePurchasesResult {
+        return .restored
+    }
 }
 #endif
