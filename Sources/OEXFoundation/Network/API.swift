@@ -243,13 +243,13 @@ extension DataRequest {
     }
     
     func validateContentType() -> Self {
-        let contentTypes: () -> [String] = { [unowned self] in
-            if let accept = request?.value(forHTTPHeaderField: "Accept") {
-                return accept.components(separatedBy: ",")
-            }
-            return ["*/*"]
+        let types: [String]
+        if let accept = request?.value(forHTTPHeaderField: "Accept") {
+            types = accept.components(separatedBy: ",")
+        } else {
+            types = ["*/*"]
         }
-        return validate(contentType: contentTypes())
+        return validate(contentType: types)
     }
 }
 
